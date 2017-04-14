@@ -11,7 +11,7 @@ object BST{
 }
 
 abstract sealed class BST{
-  def value: Int
+  def value: Double
   def left: BST
   def right: BST
   def isEmpty: Boolean
@@ -23,14 +23,14 @@ abstract sealed class BST{
     */
   def fail(m: String) = throw new NoSuchElementException(m)
 
-  def add(x: Int): BST = {
+  def add(x: Double): BST = {
     if (isEmpty) Branch(x)
     else if (x < value) Branch(value, left.add(x), right)
     else if (x > value) Branch(value, left, right.add(x))
     else this
   }
 
-  def remove(x: Int): BST ={
+  def remove(x: Double): BST ={
     if(isEmpty) fail("Can't find " + x + " in this tree.")
     else if(x < value) Branch(value, left.remove(x), right)
     else if(x > value) Branch(value, left, right.remove(x))
@@ -45,24 +45,24 @@ abstract sealed class BST{
     }
   }
 
-  def min: Int = {
-    @tailrec def loop(t: BST, m:Int): Int =
+  def min: Double = {
+    @tailrec def loop(t: BST, m:Double): Double =
       if(t.isEmpty) m else loop(t.left, t.value)
 
     if (isEmpty) fail("Empty Tree.")
     else loop(left, value)
   }
 
-  def max: Int = {
-    @tailrec def loop(t: BST, m: Int): Int =
+  def max: Double = {
+    @tailrec def loop(t: BST, m: Double): Double =
       if(t.isEmpty) m else loop(t.right, t.value)
 
     if (isEmpty) fail("Empty Tree.")
     else loop(right, value)
   }
 
-  def valuesByDepth: List[Int] ={
-    def loop(s: List[BST]): List[Int]=
+  def valuesByDepth: List[Double] ={
+    def loop(s: List[BST]): List[Double]=
       if (s.isEmpty) Nil
       else if(s.head.isEmpty) loop(s.tail)
       else s.head.value :: loop(s.head.right :: s.head.left :: s.tail)
@@ -76,13 +76,13 @@ abstract sealed class BST{
   * Sets up some defaults
   */
 case object Leaf extends BST{
-  def value: Int = fail("Empty Tree.")
+  def value: Double = fail("Empty Tree.")
   def left: BST = fail("Empty Tree.")
   def right: BST = fail("Empty Tree.")
   def isEmpty: Boolean = true
 }
 
-case class Branch(value: Int, left: BST = Leaf, right: BST = Leaf) extends BST{
+case class Branch(value: Double, left: BST = Leaf, right: BST = Leaf) extends BST{
   def isEmpty: Boolean = false
 }
 

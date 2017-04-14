@@ -64,15 +64,16 @@ object ParseIFTTStockEtf {
 
 
     // TODO: Test tree
-    val tree = BST
+//    val tree = BST
+    val tree = [1,2,3,4].foldLeft((t:BST,e:Int) => t.add(e))(Leaf)
 
-    tree.add(4);
-    tree.add(12)
-
+//    tree.add(4);
+//    tree.add(12)
+//
     println(tree.max)
-    val f = tree.valuesByDepth
-    println(f.length)
-    f.map(f => println(f))
+//    val f = tree.valuesByDepth
+//    println(f.length)
+//    f.map(f => println(f))
   }
 
 }
