@@ -23,7 +23,7 @@
   */
 
 
-import Tree.{BST, Branch, Leaf}
+import Tree.BST
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -52,7 +52,7 @@ object ParseIFTTStockEtf {
     */
   def StripClosingPrice(rows: ArrayBuffer[Array[String]]): ArrayBuffer[Double] ={
     val closingCosts:ArrayBuffer[Double] = new ArrayBuffer[Double]
-    rows.map(row => closingCosts.append(row(4).toDouble))
+    rows.map(row => closingCosts.append(row(3).toDouble))
     closingCosts
   }
 
@@ -62,18 +62,20 @@ object ParseIFTTStockEtf {
     val closingPrices = StripClosingPrice(rows)
     closingPrices.map(row => println(s"$row"))
 
+    //  TODO: Remove OOP Style tree
+    val st = new BST[String, Double]
 
-    // TODO: Test tree
-//    val tree = BST
-    val tree = closingPrices.foldLeft((t:BST,e:Double) => t.add(e))
+    rows.map(row => st.put(row(0), row(3).toDouble))
+    println(st.min())
+    println(st.get(st.min()))
+    println(st.height())
+    
+    // TODO: Fix functional style tree
 
-//    tree.add(4);
-//    tree.add(12)
-//
-    println(tree.max)
-//    val f = tree.valuesByDepth
-//    println(f.length)
-//    f.map(f => println(f))
+//    val tree = closingPrices.fold( (t:BST, e:Double)  => t.add(e))(_)
+//    println(tree.toString()
+
+
   }
 
 }
