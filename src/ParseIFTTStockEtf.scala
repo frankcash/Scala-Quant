@@ -65,7 +65,7 @@ object ParseIFTTStockEtf {
 
     // TODO: Test tree
 //    val tree = BST
-    val tree = [1,2,3,4].foldLeft((t:BST,e:Int) => t.add(e))(Leaf)
+    val tree = closingPrices.foldLeft((t:BST,e:Double) => t.add(e))
 
 //    tree.add(4);
 //    tree.add(12)
