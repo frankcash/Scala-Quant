@@ -23,6 +23,8 @@
   */
 
 
+import Tree.{BST, Branch, Leaf}
+
 import scala.collection.mutable.ArrayBuffer
 
 object ParseIFTTStockEtf {
@@ -59,6 +61,18 @@ object ParseIFTTStockEtf {
     val rows = CSVParse("C:\\Users\\Frank Cash\\Documents\\GitHub\\IFTT-Stock-Data-Manipulator\\src\\data\\sjnk.csv")
     val closingPrices = StripClosingPrice(rows)
     closingPrices.map(row => println(s"$row"))
+
+
+    // TODO: Test tree
+    val tree = BST
+
+    tree.add(4);
+    tree.add(12)
+
+    println(tree.max)
+    val f = tree.valuesByDepth
+    println(f.length)
+    f.map(f => println(f))
   }
 
 }
