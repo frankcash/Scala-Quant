@@ -25,11 +25,18 @@
 
 import Tree.{Tree, Sort}
 
-
 import scala.collection.mutable.ArrayBuffer
 
 object ParseIFTTStockEtf {
 
+  /**
+    * Step for calculating segmentation of price data when calculating local min and max for historical support and resistance
+    */
+  final val step = 5
+  /**
+    * Path for data CSV
+    */
+  final val path = "C:\\Users\\Frank Cash\\Documents\\GitHub\\IFTT-Stock-Data-Manipulator\\src\\data\\sjnk.csv"
 
   /**
     *
@@ -57,19 +64,61 @@ object ParseIFTTStockEtf {
     closingCosts
   }
 
+  /**
+    *
+    * @param xs List
+    * @param n Step size
+    * @tparam A
+    * @return Returns a list of stepped lists
+    */
+  def split[A](xs:List[A], n:Int): List[List[A]] ={
+    if(xs.isEmpty) Nil
+    else (xs take n) :: split(xs drop n, n)
+  }
+
+  /**
+    * Reference on Resistance <http://www.investopedia.com/articles/technical/061801.asp>
+    * @param data List of List Double.  Takes return from split(xs, n).
+    * @return Returns the avg resistance
+    */
+  def avgResistance(data:List[List[Double]]): Double = {
+    var runTotal = 0.0;
+    for(n <- data){
+      runTotal += (n.max)
+    }
+    return runTotal./(data.length)
+  }
+
+
+  /**
+    * Reference on Support <http://www.investopedia.com/articles/technical/061801.asp>
+    * @param data List of List Double. Takes return from split(xs, n)
+    * @return Returns the avg support
+    */
+  def avgSupport(data:List[List[Double]]): Double ={
+    var runTotal = 0.0;
+    for(n <- data){
+      runTotal += n.min
+    }
+    return runTotal./(data.length)
+  }
+
   def main(args: Array[String]): Unit= {
     println("hello World")
-    val rows = CSVParse("/home/foobar/Code/IFTT-Stock-Data-Manipulator/src/data/sjnk.csv")
+    val rows = CSVParse(path)
     val closingPrices = StripClosingPrice(rows)
-    closingPrices.map(row => println(s"$row"))
+//    closingPrices.map(row => println(s"$row"))
     val sorted = Sort.mergeSort(closingPrices.toList)
-
-    //  TODO: Remove OOP Style tree
-
     val myTree = Tree.fromSortedList(sorted)
-    println("Min my tree: " + myTree.min)
-    
+    val steppedClosingPrices = split(closingPrices.toList, step)
 
 
+    println("Average Support: " + avgSupport(steppedClosingPrices))
+    println("Average Resistance: " + avgResistance(steppedClosingPrices))
+
+
+    println("Historical Low: " + myTree.min)
+    println("Historical Max: " + myTree.max)
   }
+
 }
