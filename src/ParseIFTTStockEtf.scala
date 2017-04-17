@@ -23,7 +23,8 @@
   */
 
 
-import Tree.BST
+import Tree.{Tree, Sort}
+
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -58,24 +59,17 @@ object ParseIFTTStockEtf {
 
   def main(args: Array[String]): Unit= {
     println("hello World")
-    val rows = CSVParse("C:\\Users\\Frank Cash\\Documents\\GitHub\\IFTT-Stock-Data-Manipulator\\src\\data\\sjnk.csv")
+    val rows = CSVParse("/home/foobar/Code/IFTT-Stock-Data-Manipulator/src/data/sjnk.csv")
     val closingPrices = StripClosingPrice(rows)
     closingPrices.map(row => println(s"$row"))
+    val sorted = Sort.mergeSort(closingPrices.toList)
 
     //  TODO: Remove OOP Style tree
-    val st = new BST[String, Double]
 
-    rows.map(row => st.put(row(0), row(3).toDouble))
-    println(st.min())
-    println(st.get(st.min()))
-    println(st.height())
+    val myTree = Tree.fromSortedList(sorted)
+    println("Min my tree: " + myTree.min)
     
-    // TODO: Fix functional style tree
-
-//    val tree = closingPrices.fold( (t:BST, e:Double)  => t.add(e))(_)
-//    println(tree.toString()
 
 
   }
-
 }
