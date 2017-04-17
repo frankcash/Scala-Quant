@@ -24,7 +24,14 @@ package Tree
   * Created by Frank Cash on 4/16/17.
   */
 
-  object Sort{
+object Sort{
+
+  /**
+    *
+    * @param left List[Double]
+    * @param right List[Double]
+    * @return List[Double]
+    */
     def merge(left: List[Double], right: List[Double]):List[Double]= (left, right)match{
       case(left, Nil) => left
       case(Nil, right) => right
@@ -33,7 +40,12 @@ package Tree
         else rightHead :: merge(left, rightTail)
     }
 
-    def mergeSort(list: List[Double]): List[Double] ={
+  /**
+    *  Merge Sort
+    * @param list[Double] Input
+    * @return Returns a sorted List[Double]
+    */
+  def mergeSort(list: List[Double]): List[Double] ={
       val n = list.length / 2
       if (n == 0) list
       else{

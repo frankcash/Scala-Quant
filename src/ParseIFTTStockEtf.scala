@@ -30,13 +30,18 @@ import scala.collection.mutable.ArrayBuffer
 object ParseIFTTStockEtf {
 
   /**
+    * Path for data CSV
+    */
+  final val path = "C:\\Users\\Frank Cash\\Documents\\GitHub\\IFTT-Stock-Data-Manipulator\\src\\data\\sjnk.csv"
+  /**
     * Step for calculating segmentation of price data when calculating local min and max for historical support and resistance
     */
   final val step = 5
   /**
-    * Path for data CSV
+    * Amount of days to use for Moving Average
     */
-  final val path = "C:\\Users\\Frank Cash\\Documents\\GitHub\\IFTT-Stock-Data-Manipulator\\src\\data\\sjnk.csv"
+  final val movingAvgSize = 10
+
 
   /**
     *
@@ -96,11 +101,23 @@ object ParseIFTTStockEtf {
     * @return Returns the avg support
     */
   def avgSupport(data:List[List[Double]]): Double ={
-    var runTotal = 0.0;
+    var runTotal = 0.0
     for(n <- data){
       runTotal += n.min
     }
     return runTotal./(data.length)
+  }
+
+
+  /**
+    * Reference on Moving Average <http://www.investopedia.com/terms/m/movingaverage.asp>
+    * @param data List[Double] of prices to include in moving average
+    * @return Moving Average
+    */
+  def movingAvg(data:List[Double]): Double ={
+    var avg = 0.0
+    avg = data.sum / movingAvgSize.toDouble
+    return avg
   }
 
   def main(args: Array[String]): Unit= {
@@ -111,7 +128,9 @@ object ParseIFTTStockEtf {
     val sorted = Sort.mergeSort(closingPrices.toList)
     val myTree = Tree.fromSortedList(sorted)
     val steppedClosingPrices = split(closingPrices.toList, step)
+    val mvAvg = movingAvg(closingPrices.takeRight(movingAvgSize.toInt).toList)
 
+    println("Moving Average is: "+ mvAvg)
 
     println("Average Support: " + avgSupport(steppedClosingPrices))
     println("Average Resistance: " + avgResistance(steppedClosingPrices))
