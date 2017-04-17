@@ -11,11 +11,11 @@ Download the `CSV` file for your desired Stock/ETF.  Then copy your path for the
 
 ## Functions
 
-`avgResistance(data:ListList[[Double]]): Double`
+`avgResistance(data:List[List[Double]]): Double`
 
 Calculates the average resistance based local maxes from split lists.  Takes maximum values from the split lists and then generates an average using the amount of split lists.
 
-`avgSupport(data:ListList[[Double]]): Double`
+`avgSupport(data:List[List[Double]]): Double`
 
 Calculates the average support based local maxes from split lists.  Takes minimum values from the split lists and then generates an average using the amount of split lists.
 
