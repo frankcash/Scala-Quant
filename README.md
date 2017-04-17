@@ -6,7 +6,7 @@ This project is designed to work with a specific IFTT plugin: [Keep track of a p
 
 ## Utilizing
 
-Download the `CSV` file for your desired Stock/ETF.  Then copy your path for the file into `final val path ="{Path_HERE}""`.
+Download the `CSV` file for your desired Stock/ETF.  Then copy your path for the file into `final val path ="{Path_HERE}"`.
 
 ### License
 
