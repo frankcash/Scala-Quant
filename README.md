@@ -13,15 +13,15 @@ Download the `CSV` file for your desired Stock/ETF.  Then copy your path for the
 
 `avgResistance(data:List[List[Double]]): Double`
 
-Calculates the average resistance based local maxes from split lists.  Takes maximum values from the split lists and then generates an average using the amount of split lists.
+Calculates the [average resistance](http://www.investopedia.com/articles/technical/061801.asp) based local maxes from split lists.  Takes maximum values from the split lists and then generates an average using the amount of split lists.
 
 `avgSupport(data:List[List[Double]]): Double`
 
-Calculates the average support based local maxes from split lists.  Takes minimum values from the split lists and then generates an average using the amount of split lists.
+Calculates the [average support](http://www.investopedia.com/articles/technical/061801.asp) based local maxes from split lists.  Takes minimum values from the split lists and then generates an average using the amount of split lists.
 
 `movingAvg(data:List[Double]): Double`
 
-Calculates moving average.  The amount of days is pre-defined to 10.
+Calculates [moving average](http://www.investopedia.com/terms/m/movingaverage.asp).  The amount of days is pre-defined to 10.
 
 ## Configuration
 
