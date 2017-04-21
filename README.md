@@ -23,6 +23,10 @@ Calculates the [average support](http://www.investopedia.com/articles/technical/
 
 Calculates [moving average](http://www.investopedia.com/terms/m/movingaverage.asp).  The amount of days is pre-defined to 10.
 
+`fibRetracementValues(high:Double, low:Double): List[Double]`
+
+Calculates [Fibonacci Retracement](http://www.investopedia.com/ask/answers/05/fibonacciretracement.asp) values for the given high and low.  Predefined ratios for the retracement values are: 23.6%, 38.2%, 50.0%, 0.618%, 100%.
+
 ## Configuration
 
 It is also able to configure how many days should be grouped into the lists for calculating the average resistance and support.  Edit `final val step = 5`.

@@ -120,6 +120,38 @@ object ParseIFTTStockEtf {
     return avg
   }
 
+  /**
+    * Fibonacci Retracement Math
+    * High minus Low multiplied by the given ratio
+    * Reference on Fibonacci Retracement <http://www.investopedia.com/ask/answers/05/fibonacciretracement.asp>
+    * @param h The high value
+    * @param l The low value
+    * @param ratio The ratio to use, as a decimal
+    * @return the amount for the fibonacci retracement at the given ratio
+    */
+  def fibonacciRetracement(h:Double, l:Double, ratio:Double): Double={
+    val fib = (h - l) * ratio
+    val res = h - fib
+    res
+  }
+
+  /**
+    * Reference on Fibonacci Retracement <http://www.investopedia.com/ask/answers/05/fibonacciretracement.asp>
+    * @param high
+    * @param low
+    * @return List of fibonacci retracement values for [23.6%, 38.2%, 50.0%, 0.618%, 100%]
+    */
+  def fibRetracementValues(high:Double, low:Double): List[Double]={
+    val fib:ArrayBuffer[Double] = new ArrayBuffer[Double]
+    fib.append(fibonacciRetracement(high, low, 0.236))
+    fib.append(fibonacciRetracement(high, low, 0.382))
+    fib.append(fibonacciRetracement(high, low, 0.500))
+    fib.append(fibonacciRetracement(high, low, 0.618))
+    fib.append(fibonacciRetracement(high, low, 1.000))
+    fib.toList
+
+  }
+
   def main(args: Array[String]): Unit= {
     println("hello World")
     val rows = CSVParse(path)
@@ -129,7 +161,7 @@ object ParseIFTTStockEtf {
     val myTree = Tree.fromSortedList(sorted)
     val steppedClosingPrices = split(closingPrices.toList, step)
     val mvAvg = movingAvg(closingPrices.takeRight(movingAvgSize.toInt).toList)
-
+    val retracementLevels = fibRetracementValues(myTree.max, myTree.min)
     println("Moving Average is: "+ mvAvg)
 
     println("Average Support: " + avgSupport(steppedClosingPrices))
@@ -138,6 +170,9 @@ object ParseIFTTStockEtf {
 
     println("Historical Low: " + myTree.min)
     println("Historical Max: " + myTree.max)
+    retracementLevels.map(l => println("Retracement: " + l))
+
+
   }
 
 }
