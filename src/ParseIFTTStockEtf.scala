@@ -48,7 +48,7 @@ object ParseIFTTStockEtf {
     * @param path Path to CSV File
     * @return ArrayBuffer
     */
-  def CSVParse(path: String): ArrayBuffer[Array[String]] ={
+  def CSVParseIFTTT(path: String): ArrayBuffer[Array[String]] ={
     val rows = ArrayBuffer[Array[String]]()
     val bufferedSource = io.Source.fromFile(path)
     for(line <- bufferedSource.getLines()){
@@ -63,7 +63,7 @@ object ParseIFTTStockEtf {
     * @param rows Rows from CSVParse Output
     * @return ArrayBuffer with Closing Costs of the Stock/ETF
     */
-  def StripClosingPrice(rows: ArrayBuffer[Array[String]]): ArrayBuffer[Double] ={
+  def StripClosingPriceIFTTT(rows: ArrayBuffer[Array[String]]): ArrayBuffer[Double] ={
     val closingCosts:ArrayBuffer[Double] = new ArrayBuffer[Double]
     rows.map(row => closingCosts.append(row(3).toDouble))
     closingCosts
@@ -154,8 +154,8 @@ object ParseIFTTStockEtf {
 
   def main(args: Array[String]): Unit= {
     println("hello World")
-    val rows = CSVParse(path)
-    val closingPrices = StripClosingPrice(rows)
+    val rows = CSVParseIFTTT(path)
+    val closingPrices = StripClosingPriceIFTTT(rows)
 //    closingPrices.map(row => println(s"$row"))
     val sorted = Sort.mergeSort(closingPrices.toList)
     val myTree = Tree.fromSortedList(sorted)
