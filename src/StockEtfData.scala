@@ -22,17 +22,13 @@
   * Made to work CSV output from: https://ifttt.com/applets/117304p-keep-track-of-a-particular-stock-s-daily-closing-price-in-a-spreadsheet
   */
 
-import Parse.{CsvUtil, IFTTTParse}
+import Parse.{CsvUtil, IFTTTParse, GoogleFinanceParse}
 import Tree.{Tree, Sort}
 
 import scala.collection.mutable.ArrayBuffer
 
 object StockEtfData {
 
-  /**
-    * Path for data CSV
-    */
-  final val path = "/home/foobar/Code/IFTT-Stock-Data-Manipulator/src/data/sjnk.csv"
   /**
     * Step for calculating segmentation of price data when calculating local min and max for historical support and resistance
     */
@@ -116,11 +112,10 @@ object StockEtfData {
 
   }
 
-  def main(args: Array[String]): Unit= {
+  def IFTTT(path:String ): Unit= {
     println("hello World")
     val rows = CsvUtil.CSVParseIFTTT(path)
     val closingPrices = IFTTTParse.StripClosingPriceIFTTT(rows)
-//    closingPrices.map(row => println(s"$row"))
     val sorted = Sort.mergeSort(closingPrices.toList)
     val myTree = Tree.fromSortedList(sorted)
     val steppedClosingPrices = CsvUtil.split(closingPrices.toList, step)
@@ -139,4 +134,29 @@ object StockEtfData {
 
   }
 
-}
+  def Goog(path:String ): Unit= {
+    val rows = CsvUtil.CSVParseIFTTT(path)
+    val closingPrices = GoogleFinanceParse.StripClosingPriceGoog(rows)
+    val sorted = Sort.mergeSort(closingPrices.toList)
+    val myTree = Tree.fromSortedList(sorted)
+    val steppedClosingPrices = CsvUtil.split(closingPrices.toList, step)
+    val mvAvg = movingAvg(closingPrices.takeRight(movingAvgSize.toInt).toList)
+    val retracementLevels = fibRetracementValues(myTree.max, myTree.min)
+    println("Moving Average is: "+ mvAvg)
+
+    println("Average Support: " + avgSupport(steppedClosingPrices))
+    println("Average Resistance: " + avgResistance(steppedClosingPrices))
+
+
+    println("Historical Low: " + myTree.min)
+    println("Historical Max: " + myTree.max)
+    retracementLevels.map(l => println("Retracement: " + l))
+  }
+
+  def main(args: Array[String]): Unit= {
+    IFTTT("/home/foobar/Code/IFTT-Stock-Data-Manipulator/src/data/sjnk.csv")
+    Goog("/home/foobar/Code/IFTT-Stock-Data-Manipulator/src/data/txn-no_headers.csv")
+  }
+
+
+  }
