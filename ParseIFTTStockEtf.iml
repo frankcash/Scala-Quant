@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -15,11 +15,15 @@
     <orderEntry type="library" name="org.scalactic:scalactic_2.11:3.0.0-SNAP13" level="project" />
     <orderEntry type="library" name="org.scalatest:scalatest_2.11:3.0.0-SNAP13" level="project" />
     <orderEntry type="library" name="scala-sdk-2.11.11" level="project" />
-    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.11.2" level="project" />
-    <orderEntry type="library" name="Maven: org.scalactic:scalactic_2.11:3.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.scala-lang:scala-reflect:2.11.8" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.scalatest:scalatest_2.11:3.0.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.scala-lang.modules:scala-xml_2.11:1.0.5" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.scalatest:scalatest_2.10:2.2.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.scala-lang:scala-reflect:2.10.4" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.10.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.pegdown:pegdown:1.2.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.parboiled:parboiled-java:1.1.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.parboiled:parboiled-core:1.1.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.ow2.asm:asm:4.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.ow2.asm:asm-tree:4.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.ow2.asm:asm-analysis:4.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.ow2.asm:asm-util:4.1" level="project" />
   </component>
 </module>
