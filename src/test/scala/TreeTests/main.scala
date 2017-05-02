@@ -1,3 +1,5 @@
+package TreeTests
+
 import Tree.Sort
 import org.scalatest.FunSuite
 
