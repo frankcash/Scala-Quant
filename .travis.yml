@@ -1,0 +1,4 @@
+install: mvn install
+language: java
+jdk:
+  - openjdk8
