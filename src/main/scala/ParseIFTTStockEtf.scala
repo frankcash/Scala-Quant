@@ -32,7 +32,7 @@ object ParseIFTTStockEtf {
   /**
     * Path for data CSV
     */
-  final val path = "C:\\Users\\Frank Cash\\Documents\\GitHub\\IFTT-Stock-Data-Manipulator\\src\\data\\sjnk.csv"
+  final val path = "/home/foobar/Code/IFTT-Stock-Data-Manipulator/src/main/java/data/sjnk.csv"
   /**
     * Step for calculating segmentation of price data when calculating local min and max for historical support and resistance
     */
