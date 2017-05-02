@@ -1,2 +1,2 @@
 install: mvn install
-language: java
+language: scala
