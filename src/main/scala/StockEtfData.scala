@@ -38,9 +38,6 @@ object StockEtfData {
     */
   final val movingAvgSize = 10
 
-
-
-
   /**
     * Reference on Resistance <http://www.investopedia.com/articles/technical/061801.asp>
     * @param data List of List Double.  Takes return from split(xs, n).
