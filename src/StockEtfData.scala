@@ -27,7 +27,7 @@ import Tree.{Tree, Sort}
 
 import scala.collection.mutable.ArrayBuffer
 
-object ParseIFTTStockEtf {
+object StockEtfData {
 
   /**
     * Path for data CSV
