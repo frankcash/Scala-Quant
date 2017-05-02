@@ -17,7 +17,7 @@
     <orderEntry type="library" name="scala-sdk-2.11.11" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.scalatest:scalatest_2.10:2.2.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.scala-lang:scala-reflect:2.10.4" level="project" />
-    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.10.4" level="project" />
+    <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.11.8" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.pegdown:pegdown:1.2.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.parboiled:parboiled-java:1.1.4" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.parboiled:parboiled-core:1.1.4" level="project" />

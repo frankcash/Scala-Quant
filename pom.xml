@@ -7,7 +7,7 @@
     <artifactId>ParseIFTTStockEtf</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <scala.version>2.10.4</scala.version>
+        <scala.version>2.11.8</scala.version>
         <scalaTest.version>2.2.0</scalaTest.version>
         <javaSource.version>1.7</javaSource.version>
         <javaTarget.version>1.7</javaTarget.version>
