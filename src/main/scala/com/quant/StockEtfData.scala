@@ -23,7 +23,7 @@
   */
 
 import Tree.{Sort, Tree}
-import Parse.{CsvUtil, GoogleFinanceParse, IFTTTParse}
+import com.quant.Parse.{CsvUtil, GoogleFinanceParse, IFTTTParse}
 
 import scala.collection.mutable.ArrayBuffer
 
