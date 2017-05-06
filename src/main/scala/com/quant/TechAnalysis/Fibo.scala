@@ -3,7 +3,7 @@ package com.quant.TechAnalysis
 import scala.collection.mutable.ArrayBuffer
 
 /**
-  * Created by majora on 5/6/17.
+  * Created by Frank Cash on 5/6/17.
   */
 object Fibo {
   /**

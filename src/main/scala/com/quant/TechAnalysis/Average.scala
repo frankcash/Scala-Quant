@@ -1,7 +1,7 @@
 package com.quant.TechAnalysis
 
 /**
-  * Created by majora on 5/6/17.
+  * Created by Frank Cash on 5/6/17.
   */
 object Average {
 
