@@ -22,10 +22,10 @@
   * Made to work CSV output from: https://ifttt.com/applets/117304p-keep-track-of-a-particular-stock-s-daily-closing-price-in-a-spreadsheet
   */
 
+import com.quant.TechAnalysis.{Average, Fibo}
 import Tree.{Sort, Tree}
 import com.quant.Parse.{CsvUtil, GoogleFinanceParse, IFTTTParse}
 
-import scala.collection.mutable.ArrayBuffer
 
 object StockEtfData {
 
@@ -38,76 +38,7 @@ object StockEtfData {
     */
   final val movingAvgSize = 10
 
-  /**
-    * Reference on Resistance <http://www.investopedia.com/articles/technical/061801.asp>
-    * @param data List of List Double.  Takes return from split(xs, n).
-    * @return Returns the avg resistance
-    */
-  def avgResistance(data:List[List[Double]]): Double = {
-    var runTotal = 0.0;
-    for(n <- data){
-      runTotal += (n.max)
-    }
-    return runTotal./(data.length)
-  }
 
-
-  /**
-    * Reference on Support <http://www.investopedia.com/articles/technical/061801.asp>
-    * @param data List of List Double. Takes return from split(xs, n)
-    * @return Returns the avg support
-    */
-  def avgSupport(data:List[List[Double]]): Double ={
-    var runTotal = 0.0
-    for(n <- data){
-      runTotal += n.min
-    }
-    return runTotal./(data.length)
-  }
-
-
-  /**
-    * Reference on Moving Average <http://www.investopedia.com/terms/m/movingaverage.asp>
-    * @param data List[Double] of prices to include in moving average
-    * @return Moving Average
-    */
-  def movingAvg(data:List[Double]): Double ={
-    var avg = 0.0
-    avg = data.sum / movingAvgSize.toDouble
-    return avg
-  }
-
-  /**
-    * Fibonacci Retracement Math
-    * High minus Low multiplied by the given ratio
-    * Reference on Fibonacci Retracement <http://www.investopedia.com/ask/answers/05/fibonacciretracement.asp>
-    * @param h The high value
-    * @param l The low value
-    * @param ratio The ratio to use, as a decimal
-    * @return the amount for the fibonacci retracement at the given ratio
-    */
-  def fibonacciRetracement(h:Double, l:Double, ratio:Double): Double={
-    val fib = (h - l) * ratio
-    val res = h - fib
-    res
-  }
-
-  /**
-    * Reference on Fibonacci Retracement <http://www.investopedia.com/ask/answers/05/fibonacciretracement.asp>
-    * @param high
-    * @param low
-    * @return List of fibonacci retracement values for [23.6%, 38.2%, 50.0%, 0.618%, 100%]
-    */
-  def fibRetracementValues(high:Double, low:Double): List[Double]={
-    val fib:ArrayBuffer[Double] = new ArrayBuffer[Double]
-    fib.append(fibonacciRetracement(high, low, 0.236))
-    fib.append(fibonacciRetracement(high, low, 0.382))
-    fib.append(fibonacciRetracement(high, low, 0.500))
-    fib.append(fibonacciRetracement(high, low, 0.618))
-    fib.append(fibonacciRetracement(high, low, 1.000))
-    fib.toList
-
-  }
 
   def IFTTT(path:String ): Unit= {
     println("hello World")
@@ -116,12 +47,12 @@ object StockEtfData {
     val sorted = Sort.mergeSort(closingPrices.toList)
     val myTree = Tree.fromSortedList(sorted)
     val steppedClosingPrices = CsvUtil.split(closingPrices.toList, step)
-    val mvAvg = movingAvg(closingPrices.takeRight(movingAvgSize.toInt).toList)
-    val retracementLevels = fibRetracementValues(myTree.max, myTree.min)
+    val mvAvg = Average.movingAvg(movingAvgSize.toDouble, closingPrices.takeRight(movingAvgSize.toInt).toList)
+    val retracementLevels = Fibo.fibRetracementValues(myTree.max, myTree.min)
     println("Moving Average is: "+ mvAvg)
 
-    println("Average Support: " + avgSupport(steppedClosingPrices))
-    println("Average Resistance: " + avgResistance(steppedClosingPrices))
+    println("Average Support: " + Average.avgSupport(steppedClosingPrices))
+    println("Average Resistance: " + Average.avgResistance(steppedClosingPrices))
 
 
     println("Historical Low: " + myTree.min)
@@ -137,12 +68,12 @@ object StockEtfData {
     val sorted = Sort.mergeSort(closingPrices.toList)
     val myTree = Tree.fromSortedList(sorted)
     val steppedClosingPrices = CsvUtil.split(closingPrices.toList, step)
-    val mvAvg = movingAvg(closingPrices.takeRight(movingAvgSize.toInt).toList)
-    val retracementLevels = fibRetracementValues(myTree.max, myTree.min)
+    val mvAvg = Average.movingAvg(movingAvgSize.toDouble, closingPrices.takeRight(movingAvgSize.toInt).toList)
+    val retracementLevels = Fibo.fibRetracementValues(myTree.max, myTree.min)
     println("Moving Average is: "+ mvAvg)
 
-    println("Average Support: " + avgSupport(steppedClosingPrices))
-    println("Average Resistance: " + avgResistance(steppedClosingPrices))
+    println("Average Support: " + Average.avgSupport(steppedClosingPrices))
+    println("Average Resistance: " + Average.avgResistance(steppedClosingPrices))
 
 
     println("Historical Low: " + myTree.min)
@@ -151,8 +82,8 @@ object StockEtfData {
   }
 
   def main(args: Array[String]): Unit= {
-    IFTTT("/home/foobar/Code/IFTT-Stock-Data-Manipulator/src/data/sjnk.csv")
-    Goog("/home/foobar/Code/IFTT-Stock-Data-Manipulator/src/data/txn-no_headers.csv")
+    IFTTT("/Users/majora/Code/Scala-Quant/src/data/sjnk.csv")
+    Goog("/Users/majora/Code/Scala-Quant/src/data/txn-no_headers.csv")
   }
 
 
